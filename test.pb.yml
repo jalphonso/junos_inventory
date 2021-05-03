@@ -1,0 +1,16 @@
+---
+
+- hosts: all
+  connection: local
+  gather_facts: no
+  roles:
+  - role: Juniper.junos
+  tasks:
+  - name: gather chassis inventory
+    juniper_junos_table:
+      file: "inventory.yml"
+      table: ModuleTable
+    register: response
+  - name: Print response
+    debug:
+      var: response
